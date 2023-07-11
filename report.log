@@ -1,0 +1,4 @@
+2023-02-06 17:46:06,584 - matplotlib.font_manager - WARNING - findfont: Font family ['roboto'] not found. Falling back to DejaVu Sans.
+2023-02-06 17:47:43,431 - matplotlib.font_manager - WARNING - findfont: Font family ['roboto'] not found. Falling back to DejaVu Sans.
+2023-02-06 17:48:46,678 - matplotlib.font_manager - WARNING - findfont: Font family ['roboto'] not found. Falling back to DejaVu Sans.
+2023-02-06 17:51:54,702 - matplotlib.font_manager - WARNING - findfont: Font family ['roboto'] not found. Falling back to DejaVu Sans.
