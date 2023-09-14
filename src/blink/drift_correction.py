@@ -14,7 +14,7 @@ import blink.image_processing as imp
 
 class DriftCorrector:
     def __init__(self,drifter):
-        self._driftlist = None
+        self._driftlist = drifter
         self._cum_driftlist = None
 
     def shift_aois(self, aois: "imp.Aois", target_frame: int) -> "imp.Aois":
@@ -177,7 +177,7 @@ class DriftCorrector:
         The driftlist[i, 1:3] corresponds to the shift of the coordinates between
         the (driftlist[i, 0]-1)th frame and the (driftlist[i, 0])th frame.
         """
-        drifter = cls()
+        drifter = cls(drifter)
         drifter._driftlist = driftlist
         drifter._cum_driftlist = np.zeros((driftlist.shape[0], driftlist.shape[1] - 1))
         drifter._cum_driftlist[:, :2] = np.cumsum(driftlist[:, 1:3], axis=0)

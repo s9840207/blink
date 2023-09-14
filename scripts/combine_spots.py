@@ -47,8 +47,8 @@ def one_file(datadir, mapper):
 
 # input the file of bgr after spot combined (combine the view at left and right side)
 def main():
-    datadir = Path(r'D:\CWH\2023\20230630\1_10min FRET_aoi') # the file that has been circled the spot
-    mapping_path = Path(r'D:\mapping_for_cosmos_20230425\map.npz') # the mapping file that has been mapping
+    datadir = Path(r'D:\CWH\2023\20230725\4_realtime_10mins_aoi') # the file that has been circled the spot
+    mapping_path = Path(r'D:\mapping_for_cosmos_20230725\map.npz') # the mapping file that has been mapping
     mapper = blink.mapping.Mapper.from_npz(mapping_path)
 
     one_file(datadir, mapper)

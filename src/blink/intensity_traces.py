@@ -51,8 +51,8 @@ def main():
     map_file_paths = [
         map_dir / (name + ".npz") for name in channels_data["map file name"]
     ]
-    target_channel = imp.Channel("red", "red")
-    mapper = mapping.Mapper.from_npz(Path(r'D:\mapping_for_cosmos_20230425\map.npz'))
+    target_channel = imp.Channel("green", "green")
+    mapper = mapping.Mapper.from_npz(Path(r'D:\mapping_for_cosmos_20230725\map.npz'))
     for _, parameter in parameters.iterrows():
         image_group = imp.ImageGroup(image_master_dir / parameter["foldername"])
         aoiinfo_path = data_dir / (parameter.filename + "_aoi.npz")
@@ -86,17 +86,17 @@ def main():
 
         threshold = parameter["drift_thres"]
         driftlist_path = data_dir / (parameter.filename + "_driftlist.npy")
-        # if driftlist_path.is_file():
-        #     drifter = dcorr.DriftCorrector.from_npy(driftlist_path)
-        # else:
-        #     breakpoint()
-        #     drifter = dcorr.drift_detection(
-        #         image_group.sequences[target_channel],
-        #         frame_range[target_channel],
-        #         threshold,
-        #         aois,
-        #     )
-        drifter = None
+        if driftlist_path.is_file():
+            drifter = dcorr.DriftCorrector.from_npy(driftlist_path)
+        else:
+            
+            drifter = dcorr.drift_detection(
+                image_group.sequences[target_channel],
+                frame_range[target_channel],
+                threshold,
+                aois,
+            )
+        # drifter = None
         if drifter is None:
             print(f"{parameter.filename} not drift corrected.")
             drifter = dcorr.DriftCorrector(None)

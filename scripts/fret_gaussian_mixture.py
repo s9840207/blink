@@ -44,11 +44,11 @@ def plot_his(x_axis, mean, covs, weights, fret_array,
 
 def main():
 
-  datapath = Path(r'D:\CWH\2023\20230703\1_DNA FRET_aoi')
-  filestr = 'g_combined'
+  datapath = Path(r'D:\CWH\2023\20230725\1_wash_free_h51_aoi')
+  filestr = 'g1_combined'
   trace_path= (datapath / (filestr + "_traces.npz"))
   category_path = (datapath / (filestr + "_category.npy"))
-  color = ['#4F9D9D', '#7373B9', '#C48888','#D04978']
+  color = ['#4F9D9D', '#7373B9', '#C48888','#D04978', '#8B4513']
   hist_color = ['#8CAD05']
   fret_list = []
   traces = ts.TimeTraces.from_npz_eb(trace_path)
@@ -58,15 +58,15 @@ def main():
 
 
   for i, analyzable in enumerate(category):
-    if not analyzable:
-      continue
+    # if not analyzable:
+    #   continue
     donor_intensity = traces.get_intensity(imp.Channel('green', 'green'), i)
     acceptor_intensity = traces.get_intensity(imp.Channel('green', 'red'),i)
     total = donor_intensity + acceptor_intensity
     fret = acceptor_intensity / total
     w = 20
     avg_fret = np.mean(fret[:w])
-    if avg_fret > 1:
+    if avg_fret > 0.7 :
       continue
     else:
       fret_list.append(avg_fret)
@@ -112,7 +112,7 @@ def main():
   plt.show()
   plt.close()
 
-  n = 1
+  n = 4
   gmm = GMM(n_components = n, max_iter=1000, random_state=10, covariance_type = 'full')
   
   
